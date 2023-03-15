@@ -68,9 +68,21 @@ public class Player {
       this.velocity[1] = 0;
       this.position[1] = 680;
     }
-    if ((this.position[0] > 1280) || (this.position[0] < 0)) {
-      this.acceleration[0] *= -1;
-      this.velocity[0] *= -1;
+
+    //if ((this.position[0] > 1280) || (this.position[0] < 0)) {
+    //  this.acceleration[0] *= -1;
+    //  this.velocity[0] *= -1;
+    //}
+    
+    if (this.position[0] < 0) {
+      //  this.acceleration[0] =0;
+      //this.velocity[0] =0;
+      this.position[0]=0;
+    }
+    if (this.position[0] > 1280 - this.size[0]) {
+      this.position[0]=1280- this.size[0];
+      this.acceleration[0] =0;
+      this.velocity[0] =0;
     }
     if ((this.velocity[0] > -1) && (this.velocity[0] < 1)) {
       this.acceleration[0] = 0;
@@ -84,7 +96,7 @@ public class Player {
 
   void display()
   {
-    rect(this.position[0], this.position[1], this.size[0], this.size[1]);
+      rect(this.position[0], this.position[1], this.size[0], this.size[1]);
   }
 
   void updatePosition() {
