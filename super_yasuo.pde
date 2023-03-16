@@ -28,6 +28,8 @@
  When fired a projectile, put a method into draw() that check every time the current position of the projectile
  and if it's equal to another object under observation, both have to be terminated.
  
+ With a key it could be put a shape around the player with thick border
+ 
  @@@@@@@@@@@
  TO SOLVE
  @@@@@@@@@@@
@@ -44,7 +46,7 @@
 ///////////////////////////////////////////////////////////////////
 
 Player player = new Player();
-Projectile p = new Projectile();
+Projectile p;
 
 ////////////////
 // SETTINGS
@@ -62,6 +64,7 @@ Key k1 = new Key("Jump", true);
 Key k2 = new Key("Left", false);
 Key k3 = new Key("Right", false);
 Key k4 = new Key("Run", false);
+Key k5 = new Key("Fire", false);
 
 ///////////////////////////////////////////////////////////////////////
 //------------------------- EVENT LISTENERS -------------------------//
@@ -80,6 +83,9 @@ void keyPressed() {
   if (keyCode==SHIFT) {
     k4.setActive(true);
   }
+  if (key == ' ') {
+    k5.setActive(true);
+  }
 }
 
 void keyReleased() {
@@ -96,6 +102,9 @@ void keyReleased() {
   if (keyCode==SHIFT) {
     k4.setActive(false);
   }
+  if (key == ' ') {
+    k5.setActive(false);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -105,6 +114,7 @@ void keyReleased() {
 void playActiveKeys() {
   runWalk();
   runJump();
+  runFire();
 }
 
 void runJump() {
@@ -133,6 +143,13 @@ void runWalk() {
   }
 }
 
+void runFire() {
+  if (k5.active) {
+    p = new Projectile();
+    p.setPosition(player.getPosition());
+  }
+}
+
 ////////////////////////////////////////////////////////////
 //------------------------- MAIN -------------------------//
 ////////////////////////////////////////////////////////////
@@ -142,8 +159,39 @@ void setup() {
   surface.setLocation(0, 0);
 }
 
+int m;
 void draw() {
   playActiveKeys();
   background(255);
   player.updatePosition();
+  //println(m);
+  //println(p);
+  if(!(p==null)){
+    p.updatePosition();
+    //println("ciao");
+    //m=millis();
+    //println(p.getPosition());
+  //  if(m>2000) {
+  //    println(m);
+  //println(p);
+  //    p = null;
+  //    m=0;
+  //  }
+      
+    if(p.getPosition()[0]<0 || p.getPosition()[0]>1280 || p.getPosition()[1]<0 || p.getPosition()[1]>720) p=null;
+  }
+  
+  
+  
+  //if (!(p.getPosition()==null)) {
+  //  p.updatePosition();  
+  //  //println(p.id+" "+p.getPosition()[0]);
+  //  println(p.getPosition());
+  //  m= millis();
+  //}
+  //if (m>3000 && !(p.getPosition()==null)) {
+  //  p.setPosition(new float [] {0,0});
+  //}
+  //println(m);
+  //println(p.getPosition()==null);
 }

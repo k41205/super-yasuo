@@ -14,7 +14,7 @@ public class Player {
   //------------------//
 
   public float[] getSize() {
-    return new float[]{this.size[0], this.size[1]};
+    return this.size;
   }
 
   public void setSize(float w, float h) {
@@ -23,7 +23,7 @@ public class Player {
   };
 
   public float[] getPosition() {
-    return new float[]{this.position[0], this.position[1]};
+    return this.position;
   }
 
   public void setPosition(float x, float y) {
@@ -32,7 +32,7 @@ public class Player {
   }
 
   public float[] getVelocity() {
-    return new float[]{this.velocity[0], this.velocity[1]};
+    return this.velocity;
   }
 
   public void setVelocity(float x, float y) {
@@ -41,7 +41,7 @@ public class Player {
   }
 
   public float[] getAcceleration() {
-    return new float[]{this.acceleration[0], this.acceleration[1]};
+    return this.acceleration;
   }
 
   public void setAcceleration(float x, float y) {
